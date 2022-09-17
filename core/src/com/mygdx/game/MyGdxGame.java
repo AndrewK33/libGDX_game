@@ -35,6 +35,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		coinSprite = new Texture(Gdx.files.internal("coinSprite.png"));
 		runRight = new CharacterAtlasAnimation("characterAtlas/walkAtlas.atlas", "walk_right", 9, Animation.PlayMode.LOOP);
 		characterStand = new CharacterAtlasAnimation("characterAtlas/walkAtlas.atlas", "stand", 5, Animation.PlayMode.LOOP);
+		runLeft = new CharacterAtlasAnimation("characterAtlas/walkAtlas.atlas", "walk_left", 9, Animation.PlayMode.LOOP);
 		characterState = characterStand;
 	}
 	public void initMusic() {
@@ -57,15 +58,17 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(1, 1, 1, 1);
 		characterState = characterStand;
-		dir = 0;
+		/*dir = 0;*/
 
 		if (mainInputProcessor.getOutString().contains("A")) {
 			dir = -1;
-			characterState = runRight;
+			characterState = runLeft;
+			x--;
 		}
 		if (mainInputProcessor.getOutString().contains("D")) {
 			dir = 1;
 			characterState = runRight;
+			x++;
 		}
 		if (mainInputProcessor.getOutString().contains("W")) {
 			y++;
@@ -79,12 +82,12 @@ public class MyGdxGame extends ApplicationAdapter {
 			y = Gdx.graphics.getHeight()/2;
 		}
 
-		if (dir == -1) x-=step;
-		if (dir == 1) x+=step;
+		/*if (dir == -1) x-=step;
+		if (dir == 1) x+=step;*/
 
-		TextureRegion tmp = characterState.draw();
+		/*TextureRegion tmp = characterState.draw();
 		if (!characterState.draw().isFlipX() & dir == -1) characterState.draw().flip(true, false);
-		if (characterState.draw().isFlipX() & dir == 1) characterState.draw().flip(true, false);
+		if (characterState.draw().isFlipX() & dir == 1) characterState.draw().flip(true, false);*/
 
 		characterState.setTime(Gdx.graphics.getDeltaTime());
 		batch.begin();
